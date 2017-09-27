@@ -13,14 +13,14 @@ A quick introduction of the minimal setup you need to get a up running this proj
 Setup database:
 
 ```shell
-cd logsanalysis
+cd fswd-logs-analysis
 psql -d news -f newsdata.sql
 ```
 
 Run program:
 
 ```shell
-cd logsanalysis
+cd fswd-logs-analysis
 python newsdata.py
 ```
 
@@ -35,7 +35,7 @@ python newsdata.py
 ### Directory structure
 
 ```text
-newsdata
+fswd-logs-analysis
 |   LICENSE
 |   newsdata.py (code to run)
 |   newsdata.sql (SQL code to create the database)
@@ -46,6 +46,15 @@ newsdata
 ### Prerequisites
 
 In order to run this code you need Python 3, PostgreSQL & Psycopg on your computer.
+
+### Settint up Dev
+
+Clone the repository:
+
+```shell
+git clone https://github.com/volcain-io/fswd-logs-analysis.git
+cd fswd-logs-analysis/
+```
 
 ## Style guide
 
