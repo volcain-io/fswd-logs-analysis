@@ -74,7 +74,7 @@ def get_days_of_error():
           SELECT tmp.h_date, tmp.total, tmp.error,
             ROUND( 100.00 * (
                 CAST(tmp.error AS DECIMAL) / CAST(tmp.total AS DECIMAL)
-                ), 1) AS percent FROM
+                ), 2) AS percent FROM
             (
               SELECT DATE(time) AS h_date,
                 COUNT(*) AS total,
