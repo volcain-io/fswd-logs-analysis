@@ -14,15 +14,6 @@ A quick introduction of the minimal setup you need to get a up running this proj
 
 In order to run this code you need Python 3, PostgreSQL & Psycopg on your computer.
 
-### Setting up Dev
-
-Clone the repository:
-
-```shell
-git clone https://github.com/volcain-io/fswd-logs-analysis.git
-cd fswd-logs-analysis/
-```
-
 ### Setting up Database
 
 ```shell
@@ -44,6 +35,15 @@ cd fswd-logs-analysis
 [PostgreSQL](https://www.postgresql.org/download/)
 [Psycopg](http://initd.org/psycopg/download/)
 [Python 3](https://www.python.org/download/releases/3.0/)
+
+### Setting up Dev
+
+Clone the repository:
+
+```shell
+git clone https://github.com/volcain-io/fswd-logs-analysis.git
+cd fswd-logs-analysis/
+```
 
 ### Directory structure
 
