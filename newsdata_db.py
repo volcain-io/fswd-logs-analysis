@@ -69,15 +69,15 @@ def get_top_authors():
 
 def get_days_of_error():
     """Days with more than 1% of requests which lead to errors"""
-    sql = """SELECT r.h_date, r.percent FROM
+    sql = """SELECT TO_CHAR(r.h_date, 'FMMonth FMDD, YYYY'), r.percent FROM
         (
           SELECT tmp.h_date, tmp.ok, tmp.error,
             ROUND( 100.00 * (
                 CAST(tmp.error AS DECIMAL) / CAST(tmp.ok AS DECIMAL)
                 ), 1) AS percent FROM
             (
-              SELECT TO_CHAR(time, 'FMMonth DD, YYYY') AS h_date,
-                SUM( CASE WHEN status = '200 OK' THEN 1 ELSE 0 END ) AS ok,
+              SELECT DATE(time) AS h_date,
+                SUM( CASE WHEN status = '200 OK' THEN 1 ELSE 0 END ) AS ok
                 SUM( CASE WHEN status != '200 OK' THEN 1 ELSE 0 END ) AS error
                 FROM log
               GROUP BY h_date
