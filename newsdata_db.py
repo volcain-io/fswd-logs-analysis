@@ -72,8 +72,8 @@ def get_days_of_error():
     sql = """SELECT TO_CHAR(r.h_date, 'FMMonth FMDD, YYYY'), r.percent FROM
         (
           SELECT tmp.h_date, tmp.total, tmp.error,
-            ROUND( 100.00 * (
-                CAST(tmp.error AS DECIMAL) / CAST(tmp.total AS DECIMAL)
+            ROUND( 100 * (
+                CAST(tmp.error AS DECIMAL) / tmp.total
                 ), 2) AS percent FROM
             (
               SELECT DATE(time) AS h_date,
