@@ -9,7 +9,7 @@ def get_top_articles():
     """Most popular three articles of all time"""
     sql = """SELECT articles.title, COUNT(*) AS views
                 FROM articles, log
-                WHERE log.path LIKE '%' || articles.slug
+                WHERE log.path = '/article/' || articles.slug
                 GROUP BY articles.title
                 ORDER BY views DESC
                 LIMIT 3;"""
@@ -41,7 +41,7 @@ def get_top_authors():
     sql = """SELECT authors.name, COUNT(*) AS views
                 FROM authors, articles, log
                 WHERE authors.id = articles.author
-                    AND log.path LIKE '%' || articles.slug
+                    AND log.path = '/article/' || articles.slug
                 GROUP BY authors.name
                 ORDER BY views DESC;"""
     conn = None
