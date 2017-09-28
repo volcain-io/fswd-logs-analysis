@@ -14,7 +14,7 @@ A quick introduction of the minimal setup you need to get a up running this proj
 
 In order to run this code you need Python 3, PostgreSQL & Psycopg on your computer.
 
-### Setting up Database
+### Setting up database
 
 ```shell
 cd fswd-logs-analysis
