@@ -71,13 +71,13 @@ def get_days_of_error():
     """Days with more than 1% of requests which lead to errors"""
     sql = """SELECT TO_CHAR(r.h_date, 'FMMonth FMDD, YYYY'), r.percent FROM
         (
-          SELECT tmp.h_date, tmp.ok, tmp.error,
+          SELECT tmp.h_date, tmp.total, tmp.error,
             ROUND( 100.00 * (
-                CAST(tmp.error AS DECIMAL) / CAST(tmp.ok AS DECIMAL)
+                CAST(tmp.error AS DECIMAL) / CAST(tmp.total AS DECIMAL)
                 ), 1) AS percent FROM
             (
               SELECT DATE(time) AS h_date,
-                SUM( CASE WHEN status = '200 OK' THEN 1 ELSE 0 END ) AS ok
+                COUNT(*) AS total,
                 SUM( CASE WHEN status != '200 OK' THEN 1 ELSE 0 END ) AS error
                 FROM log
               GROUP BY h_date
