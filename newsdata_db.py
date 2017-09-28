@@ -5,6 +5,32 @@ import psycopg2
 DBNAME = "news"
 
 
+def query(sql_select_statement):
+    """Return result of given SQL statement"""
+    conn = None
+    resultset = None
+    if sql_select_statement is not None:
+        try:
+            # connect to PostgreSQL database
+            conn = psycopg2.connect(database=DBNAME)
+            # create new cursor
+            cur = conn.cursor()
+            # execute SELECT statement
+            cur.execute(sql_select_statement)
+            # fetch all rows
+            resultset = cur.fetchall()
+            # close communication with the database
+            cur.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        finally:
+            # close connection
+            if conn is not None:
+                conn.close()
+
+    return resultset
+
+
 def get_top_articles():
     """Most popular three articles of all time"""
     sql = """SELECT articles.title, COUNT(*) AS views
@@ -13,27 +39,7 @@ def get_top_articles():
                 GROUP BY articles.title
                 ORDER BY views DESC
                 LIMIT 3;"""
-    conn = None
-    resultset = None
-    try:
-        # connect to PostgreSQL database
-        conn = psycopg2.connect(database=DBNAME)
-        # create new cursor
-        cur = conn.cursor()
-        # execute SELECT statement
-        cur.execute(sql)
-        # fetch all rows
-        resultset = cur.fetchall()
-        # close communication with the database
-        conn.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        # close connection
-        if conn is not None:
-            conn.close()
-
-    return resultset
+    return query(sql)
 
 
 def get_top_authors():
@@ -44,27 +50,7 @@ def get_top_authors():
                     AND log.path = '/article/' || articles.slug
                 GROUP BY authors.name
                 ORDER BY views DESC;"""
-    conn = None
-    resultset = None
-    try:
-        # connect to PostgreSQL database
-        conn = psycopg2.connect(database=DBNAME)
-        # create new cursor
-        cur = conn.cursor()
-        # execute SELECT statement
-        cur.execute(sql)
-        # fetch all rows
-        resultset = cur.fetchall()
-        # close communication with the database
-        conn.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        # close connection
-        if conn is not None:
-            conn.close()
-
-    return resultset
+    return query(sql)
 
 
 def get_days_of_error():
@@ -85,24 +71,4 @@ def get_days_of_error():
         ) AS r
         WHERE r.percent > 1
         ORDER BY r.percent DESC;"""
-    conn = None
-    resultset = None
-    try:
-        # connect to PostgreSQL database
-        conn = psycopg2.connect(database=DBNAME)
-        # create new cursor
-        cur = conn.cursor()
-        # execute the SELECT statement
-        cur.execute(sql)
-        # fetch all rows
-        resultset = cur.fetchall()
-        # close communication with the database
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        # close connection
-        if conn is not None:
-            conn.close()
-
-    return resultset
+    return query(sql)
