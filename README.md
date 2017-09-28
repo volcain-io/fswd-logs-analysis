@@ -10,18 +10,31 @@ This project is used to analyze the logs of a newsdata database and do some repo
 
 A quick introduction of the minimal setup you need to get a up running this project.
 
-Setup database:
+### Prerequisites
+
+In order to run this code you need Python 3, PostgreSQL & Psycopg on your computer.
+
+### Setting up Dev
+
+Clone the repository:
+
+```shell
+git clone https://github.com/volcain-io/fswd-logs-analysis.git
+cd fswd-logs-analysis/
+```
+
+### Setting up Database
 
 ```shell
 cd fswd-logs-analysis
 psql -d news -f newsdata.sql
 ```
 
-Run program:
+### Execute program
 
 ```shell
 cd fswd-logs-analysis
-python newsdata.py
+./newsdata.py
 ```
 
 ## Developing
@@ -41,19 +54,6 @@ fswd-logs-analysis
 |   newsdata.sql (SQL code to create the database)
 |   newsdata_db.py (database code)
 |   README.md
-```
-
-### Prerequisites
-
-In order to run this code you need Python 3, PostgreSQL & Psycopg on your computer.
-
-### Settint up Dev
-
-Clone the repository:
-
-```shell
-git clone https://github.com/volcain-io/fswd-logs-analysis.git
-cd fswd-logs-analysis/
 ```
 
 ## Style guide
